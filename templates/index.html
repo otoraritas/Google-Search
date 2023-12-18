@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Search</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1, h2 {
+            color: #00ffcc;
+            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc;
+        }
+
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #00ffcc;
+            margin-bottom: 10px;
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+
+        input[type="submit"], button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #00ffcc;
+            color: #1a1a1a;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        input[type="submit"]:hover, button:hover {
+            background-color: #00e6e6;
+        }
+
+        .results {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .result-item {
+            margin-bottom: 10px;
+        }
+
+        .neon-text {
+            color: #00ffcc;
+            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="neon-text">Google Search</h1>
+    <form action="/search" method="post">
+        <input type="text" name="keyword" placeholder="Enter keyword">
+        <input type="number" name="max_results" placeholder="Max results" min="1" value="5">
+        <input type="submit" value="Search">
+        <button type="button" onclick="clearResults()">Clear</button>
+    </form>
+    {% if keyword %}
+        <div class="results">
+            <h2 class="neon-text">Results for "{{ keyword }}"</h2>
+            {% for result in results %}
+                <div class="result-item">
+                    <a href="{{ result }}" target="_blank" class="neon-text">{{ result }}</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <script>
+        function clearResults() {
+            document.querySelector('.results').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
